@@ -207,7 +207,6 @@ en: &DEFAULT_EN
           - url: https://www.github.com/laueb4818/
             icon: fab fa-github
 
-
       - name: "Peter Yatsyshin"
         role: "TRF Research Fellow"
         image: assets/img/team/peter-yatsyshin.jpg
@@ -220,6 +219,17 @@ en: &DEFAULT_EN
             icon: fab fa-github
           - url: https://www.linkedin.com/in/peter-yatsyshin-phd/
             icon: fab fa-linkedin-in
+
+      - name: "Ryan Chan"
+        role: "Research Software Engineer"
+        image: assets/img/team/ryan-chan.jpg
+        social:
+          - url: https://rchan26.github.io/
+            icon: fas fa-window-maximize
+          - url: https://www.linkedin.com/in/ryan-chan-2607/
+            icon: fab fa-linkedin-in
+          - url: https://www.github.com/rchan26/
+            icon: fab fa-github
 
   contact:
     title: "<br />Contact Us"
