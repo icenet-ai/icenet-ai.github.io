@@ -1,0 +1,29 @@
+---
+publishDate: 2025-01-01T00:00:00Z
+author: Bryn Noel Ubald
+title: Welcome to IceNet!
+excerpt: This is a introductory post to the new website and along with it, the blog itself.
+image: https://images.unsplash.com/photo-1478001517127-fccc92f54906?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+category: Article
+tags:
+  - news
+metadata:
+  canonical: https://astrowind.vercel.app/astrowind-template-in-depth
+---
+
+import DListItem from '~/components/ui/DListItem.astro';
+import ToggleTheme from '~/components/common/ToggleTheme.astro';
+
+## Overview
+
+**IceNet** began life as a research project spearheaded by [Tom Andersson et al.](../#tom-andersson) for deep-learning based sea ice forecasting which resulted in the publication of their seminal paper with Nature in 2021, titled [`Seasonal Arctic sea ice forecasting with probabilistic deep learning`](https://www.nature.com/articles/s41467-021-25257-4). This initial research was trained on a combination of climate simulations and observational data to forecast the next 6 months of monthly-averaged pan-Arctic sea ice concentration maps. This version advanced the range of accurate sea ice forecasts, outperforming a state-of-the-art dynamical model (ECMWF SEAS5) in seasonal forecasts of summer sea ice, particularly for extreme sea ice events.
+
+Since this initial publication, **IceNet** has developed significantly and now the name encompases a wide variety of projects and research directions. The name is also used to refer to the entire system as a whole, including the research, software and data infrastructure that underlies it. The core **IceNet** library now utilises ERA5 and OSI-SAF (with more data sources available) sea ice concentration data for training and forecasting for daily forecasts instead of monthly, and is now able to forecast pan-Arctic and pan-Antarctic (independently) daily sea ice concentration maps. These forecasts are generated on a daily basis on the British Antarctic Survey's HPC cluster.
+
+## Future Plans
+
+While an up-to-date publication is forthcoming, the blog section on the website will be updated with more information about IceNet's development. Work is also underway to deliver these forecasts to end-users in a more user-friendly approach via funding obtained from the [WWF](https://www.wwf.org.uk/).
+
+As we move to operationalising IceNet's forecasting system, we will be able to provide more information about the entire system under the hood, how it works and what it can do. This will be both from a research standpoint, as well as from a software engineering perspective aiming to provide better software engineering practices.
+
+You might notice some posts older than this introduction and think hm...! These will be retroactive blog posts covering milestones before the creation of this website and the blog itself.
