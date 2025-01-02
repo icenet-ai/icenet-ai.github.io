@@ -21,4 +21,53 @@ export async function fetchPyPIVersion(package_name: string, package_url: string
         return "";
     }
   }
-  
+
+interface PypiStats {
+    last_day: number;
+    last_month: number;
+    last_week: number;
+}
+
+interface PypiStatsApiResponse {
+    data: PypiStats;
+    package: string;
+    type: string;
+}
+
+export async function fetchPyPIDownloadStats(package_name: string): Promise<PypiStatsApiResponse> {
+try {
+    const pypistats_url = 'https://api.allorigins.win/raw?url=' + 'https://pypistats.org/api/packages/' + package_name + '/recent'
+    const response = await fetch(pypistats_url, { mode: 'no-cors' });
+    const data = await response.json();
+    return data;
+} catch (error) {
+    console.error('Error fetching ' + package_name + ' download stats:', error);
+    return {
+        data: {
+          last_day: NaN,
+          last_month: NaN,
+          last_week: NaN
+        },
+        package: package_name,
+        type: "recent_downloads"
+      };
+}
+}
+
+interface GitHubStats {
+    n_stars: number;
+    n_forks: number;
+    n_watchers: number;
+}
+
+export async function fetchGitHubStats(github_org: string, github_repo: string): Promise<GitHubStats> {
+    const github_api_url = `https://api.github.com/repos/${github_org}/${github_repo}`
+    const github_api = await fetch(github_api_url);
+    const github_data = await github_api.json();
+
+    return {
+        n_stars: github_data.stargazers_count,
+        n_forks: github_data.forks_count,
+        n_watchers: github_data.subscribers_count
+    }
+}
