@@ -26,6 +26,13 @@ metadata:
     handle: '@onwidget'
     site: '@onwidget'
     cardType: summary_large_image
+  package:
+    name: 'IceNet'
+    url: https://pypi.org/pypi/icenet
+  github:
+    url: https://github.com/icenet-ai/icenet
+    org: icenet-ai
+    repo: icenet
 
 i18n:
   language: en

@@ -1,5 +1,18 @@
 ---
 
+import { METADATA } from 'astrowind:config';
+
+const package_name = METADATA.package.name
+const package_url = METADATA.package.url
+const github_org = METADATA.github.org
+const github_repo  = METADATA.github.repo
+const github_url = `https://github.com/${github_org}/${github_repo}`
+const github_star_url = `https://img.shields.io/github/stars/${github_org}/${github_repo}.svg?style=social&label=Stars&maxAge=86400`
+
+import {fetchPyPIVersion} from '../../utils/custom-utils'
+
+const latestVersion = await fetchPyPIVersion(package_name, package_url);
+
 ---
 
 <div
@@ -9,15 +22,15 @@
     class="dark:bg-slate-700 bg-white/40 dark:text-slate-300 font-semibold px-1 py-0.5 text-xs mr-0.5 rtl:mr-0 rtl:ml-0.5 inline-block"
     >NEW</span
   >
-  <a href="https://astro.build/blog/astro-5/" class="text-muted hover:underline dark:text-slate-400 font-medium"
-    >Astro v5.0.0 is now available! »</a
+  <a href={package_url} class="text-muted hover:underline dark:text-slate-400 font-medium"
+    >{package_name} {latestVersion} is now available! »</a
   >
   <a
     target="_blank"
     rel="noopener"
-    class="ltr:ml-auto rtl:mr-auto w-[5.6rem] h-[1.25rem] ml-auto bg-contain inline-block bg-[url(https://img.shields.io/github/stars/onwidget/astrowind.svg?style=social&label=Stars&maxAge=86400)]"
-    title="If you like AstroWind, give us a star."
-    href="https://github.com/onwidget/astrowind"
+    class=`ltr:ml-auto rtl:mr-auto w-[5.6rem] h-[1.25rem] ml-auto bg-contain inline-block bg-[url(${github_star_url})]`
+    title="If you like IceNet, give us a star."
+    href={github_url}
   >
   </a>
 </div>
