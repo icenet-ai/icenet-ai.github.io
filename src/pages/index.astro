@@ -36,12 +36,17 @@ const github_stats = await fetchGitHubStats(github_org, github_repo);
     actions={[
       {
         variant: 'primary',
-        text: 'Get started',
+        text: 'Get started (Basic)',
         href: 'https://edsbook.org/notebooks/gallery/67a1e320-7c47-4ea9-8df8-e868326bc90b/notebook',
         target: '_blank',
         icon: 'tabler:external-link-off',
       },
-      { text: 'Learn more', href: '#repositories' },
+      {
+        variant: 'primary',
+        text: 'Get started (Advanced)',
+        href: '#repositories',
+      },
+      { text: 'About', href: '#about' },
     ]}
     image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
   >
