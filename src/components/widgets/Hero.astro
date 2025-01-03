@@ -1,5 +1,5 @@
 ---
-import Image from '~/components/common/Image.astro';
+// import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 
 import type { Hero as Props } from '~/types';
@@ -16,6 +16,15 @@ const {
   id,
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+var background_image_class: string | null = null;
+background_image_class = image !== null
+  ? "relative mx-auto px-4 sm:px-6 bg-cover bg-hero bg-no-repeat bg-center bg-fixed bg-[url('" + image + "')]"
+  : "relative mx-auto px-4 sm:px-6";
+
+const headerHeight_sm="72px";
+const headerHeight_md="112px";
+const headerHeight_lg="140px";
 ---
 
 <section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
@@ -24,10 +33,10 @@ const {
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
   </div>
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+  <div class={background_image_class}>
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
-    <div class="py-12 md:py-20">
-      <div class="text-center pb-10 md:pb-16 max-w-5xl mx-auto">
+    <div class=`min-h-[82.5vh] sm:min-h-[calc(100vh-${headerHeight_sm})] md:min-h-[calc(100vh-${headerHeight_md}-76px)] lg:min-h-[calc(100vh-${headerHeight_lg})]`>
+      <div class="text-center pb-10 md:pb-16 md:pt-16 max-w-5xl md:mt-5 m-auto">
         {
           tagline && (
             <p
@@ -70,29 +79,6 @@ const {
           }
         </div>
         {content && <Fragment set:html={content} />}
-      </div>
-      <div
-        class="intersect-once intercept-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-      >
-        {
-          image && (
-            <div class="relative m-auto max-w-5xl">
-              {typeof image === 'string' ? (
-                <Fragment set:html={image} />
-              ) : (
-                <Image
-                  class="mx-auto rounded-md w-full"
-                  widths={[400, 768, 1024, 2040]}
-                  sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
-                  loading="eager"
-                  width={1024}
-                  height={576}
-                  {...image}
-                />
-              )}
-            </div>
-          )
-        }
       </div>
     </div>
   </div>
