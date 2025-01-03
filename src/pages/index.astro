@@ -152,16 +152,54 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
       {
         name: 'Scott Hosking',
         job: 'Principal Investigator',
+        description: 'British Antarctic Survey, Alan Turing Institute',
         image: {src: images['/src/assets/images/team/scott-hosking.jpg'](),
                 alt: 'Picture of James'
               },
+        socials: [
+          {
+            icon: 'arcticons:earth',
+            href: 'https://scotthosking.com/'
+          },
+          {
+            icon: 'arcticons:bluesky',
+            href: 'https://bsky.app/profile/scotthosking.bsky.social'
+          },
+          {
+            icon: 'arcticons:linkedin',
+            href: 'https://www.linkedin.com/in/scotthosking/'
+          },
+          {
+            icon: 'arcticons:github',
+            href: 'https://www.github.com/scotthosking/'
+          },
+        ],
       },
       {
         name: 'James Byrne',
         job: 'Lead Research Software Engineer',
+        description: 'British Antarctic Survey',
         image: {src: images['/src/assets/images/team/james-byrne.jpg'](),
                 alt: 'Picture of James'
               },
+        socials: [
+          {
+            icon: 'arcticons:earth',
+            href: 'https://inconsistentrecords.co.uk/'
+          },
+          {
+            icon: 'arcticons:x-twitter',
+            href: 'https://twitter.com/jimcircadian'
+          },
+          {
+            icon: 'arcticons:linkedin',
+            href: 'https://www.linkedin.com/in/jimcircadian/'
+          },
+          {
+            icon: 'arcticons:github',
+            href: 'https://www.github.com/jimcircadian/'
+          },
+        ],
       },
       {
         name: 'Bryn Noel Ubald',
@@ -180,12 +218,8 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
             href: 'https://www.linkedin.com/in/bryn-noel-ubald/'
           },
           {
-            icon: 'arcticons:researchgate',
-            href: ''
-          },
-          {
-            icon: 'arcticons:x-twitter',
-            href: ''
+            icon: 'arcticons:github',
+            href: 'https://www.github.com/bnubald/'
           },
         ],
       },
