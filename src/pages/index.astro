@@ -150,6 +150,20 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     team={
     [
       {
+        name: 'Scott Hosking',
+        job: 'Principal Investigator',
+        image: {src: images['/src/assets/images/team/scott-hosking.jpg'](),
+                alt: 'Picture of James'
+              },
+      },
+      {
+        name: 'James Byrne',
+        job: 'Lead Research Software Engineer',
+        image: {src: images['/src/assets/images/team/james-byrne.jpg'](),
+                alt: 'Picture of James'
+              },
+      },
+      {
         name: 'Bryn Noel Ubald',
         job: 'Research Software Engineer',
         image: {src: images['/src/assets/images/team/bryn-ubald.jpg'](),
@@ -174,20 +188,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
             href: ''
           },
         ],
-      },
-      {
-        name: 'James Byrne',
-        job: 'Lead Research Software Engineer',
-        image: {src: images['/src/assets/images/team/james-byrne.jpg'](),
-                alt: 'Picture of James'
-              },
-      },
-      {
-        name: 'Scott Hosking',
-        job: 'Principal Investigator',
-        image: {src: images['/src/assets/images/team/scott-hosking.jpg'](),
-                alt: 'Picture of James'
-              },
       },
     ]}
   >
