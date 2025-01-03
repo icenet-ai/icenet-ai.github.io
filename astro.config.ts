@@ -33,6 +33,7 @@ export default defineConfig({
     icon({
       include: {
         tabler: ['*'],
+        arcticons: ['*'],
         'flat-color-icons': [
           'template',
           'gallery',
