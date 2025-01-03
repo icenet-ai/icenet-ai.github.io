@@ -5,6 +5,7 @@ import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import Team from '~/components/widgets/Team.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
@@ -138,6 +139,62 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     </Fragment>
   </Features2>
 
+
+  <!-- Team Widget *************** -->
+  <Team
+    id="team"
+    title="The IceNet Team"
+    subtitle="Collaborators managing various aspects of the project."
+    tagline="Team"
+    description="The IceNet project is a collaboration between The Alan Turing Institute and British Antarctic Survey. It is made possible thanks to the contributions of many across the environmental research, data science and international sea-ice and ecosystems communities at large. The names here are only those who continually manage the project, but many more have been responsible for the innovation and research that makes IceNet “an infrastructure for the future”!"
+    team={
+    [
+      {
+        name: 'Bryn Noel Ubald',
+        job: 'Research Software Engineer',
+        image: {src: images['/src/assets/images/team/bryn-ubald.jpg'](),
+                alt: 'Picture of Bryn'
+              },
+        description: 'British Antarctic Survey',
+        socials: [
+          {
+            icon: 'arcticons:earth',
+            href: 'https://www.brynnoelubald.com/'
+          },
+          {
+            icon: 'arcticons:linkedin',
+            href: 'https://www.linkedin.com/in/bryn-noel-ubald/'
+          },
+          {
+            icon: 'arcticons:researchgate',
+            href: ''
+          },
+          {
+            icon: 'arcticons:x-twitter',
+            href: ''
+          },
+        ],
+      },
+      {
+        name: 'James Byrne',
+        job: 'Lead Research Software Engineer',
+        image: {src: images['/src/assets/images/team/james-byrne.jpg'](),
+                alt: 'Picture of James'
+              },
+      },
+      {
+        name: 'Scott Hosking',
+        job: 'Principal Investigator',
+        image: {src: images['/src/assets/images/team/scott-hosking.jpg'](),
+                alt: 'Picture of James'
+              },
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Team>
 
   <!-- Features Widget *************** -->
 

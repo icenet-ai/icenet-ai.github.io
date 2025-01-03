@@ -89,7 +89,7 @@ export interface MetaDataTwitter {
 }
 
 export interface Image {
-  src: string;
+  src: ImageMetadata | string;
   alt?: string;
 }
 
@@ -109,6 +109,7 @@ export interface Headline {
   title?: string;
   subtitle?: string;
   tagline?: string;
+  description?: string;
   classes?: Record<string, string>;
 }
 
@@ -220,9 +221,12 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
   image?: string | unknown;
 }
 
+
 export interface Team extends Omit<Headline, 'classes'>, Widget {
   team?: Array<TeamMember>;
+  columns?: number;
 }
+
 
 export interface Stats extends Omit<Headline, 'classes'>, Widget {
   stats?: Array<Stat>;

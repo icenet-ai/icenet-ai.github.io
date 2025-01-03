@@ -1,0 +1,74 @@
+---
+import type { Team as Props } from '~/types';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import { twMerge } from 'tailwind-merge';
+
+const { team = [], columns, classes = {} } = Astro.props;
+
+const {
+  container: containerClass = '',
+  panel: panelClass = '',
+  name: defaultNameClass  = '',
+  job: defaultJobClass  = 'text-sm',
+  description: defaultDescriptionClass = '',
+  image: defaultImageClass = '',
+  icon: defaultIconClass = '',
+} = classes;
+
+---
+
+{
+  team && (
+    <div
+      class={twMerge(
+        `grid gap-8 gap-x-12 sm:gap-y-8 ${
+          columns === 4
+            ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+            : columns === 3
+              ? 'lg:grid-cols-3 sm:grid-cols-2'
+              : columns === 2
+                ? 'sm:grid-cols-2 '
+                : ''
+        }`,
+        '',
+        // `${classes?.container}`
+        containerClass as string
+      )}
+    >
+    {team.map(({ name, job, image, socials = [], description, classes: itemClasses = {} }) => (
+      <div class={twMerge(
+        'relative flex flex-col intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade team-grid',
+        // `${classes?.panel}`,
+        panelClass as string,
+        itemClasses?.panel
+      )}>
+          <div class="flex flex-col">
+            {(image) && (
+              <Image src={image?.src} alt='' class={twMerge('mb-2 w-10 h-10', defaultImageClass as string, itemClasses?.image)} />
+            )}
+            <div class={twMerge('text-xl font-bold', defaultNameClass as string, itemClasses?.name)}>{name}</div>
+            <div class={twMerge('text-lg', defaultJobClass as string, itemClasses?.job)}>{job}</div>
+            {description && (
+              <p class={twMerge('text-muted mt-2', defaultDescriptionClass as string, itemClasses?.description)} set:html={description} />
+            )}
+            {socials.map(({ href, icon }) => (
+              icon && (<a href={href} target="_blank" rel="noopener noreferrer">
+                <Icon name={icon} class={twMerge('mb-2 w-10 h-10', defaultIconClass as string, itemClasses?.icon)} />
+              </a>)
+            ))}
+          </div>
+      </div>
+    ))}
+    </div>
+  )
+}
+
+<style>
+  .team-grid:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    /* transition: background-color 0.3s ease; */
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+  }
+</style>
