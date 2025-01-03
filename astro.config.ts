@@ -34,6 +34,7 @@ export default defineConfig({
       include: {
         tabler: ['*'],
         arcticons: ['*'],
+        'fa6-brands': ['*'],
         'flat-color-icons': [
           'template',
           'gallery',
