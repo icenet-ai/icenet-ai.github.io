@@ -7,6 +7,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 import Team from '~/components/widgets/Team.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'IceNet — AI powered sea-ice forecasting',
@@ -34,6 +35,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
   <!-- Hero Widget ******************* -->
 
   <Hero
+    id='hero'
     actions={[
       {
         variant: 'primary',
@@ -134,10 +136,21 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     </Fragment>
   </Features2>
 
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    stats={[
+      { title: 'Downloads last month', amount: `${n_downloads_last_month}`},
+      { title: 'GitHub Stars', amount: `${github_stats.n_stars}` },
+      { title: 'GitHub Forks', amount: `${github_stats.n_forks}` },
+      { title: 'GitHub Watchers', amount: `${github_stats.n_watchers}` },
+    ]}
+  />
 
   <!-- Team Widget *************** -->
+
   <Team
-    id="team"
+    id="team-members"
     title="The IceNet Team"
     subtitle="Collaborators managing various aspects of the project."
     tagline="Team"
@@ -426,16 +439,18 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
                 `}
   />
 
-  <!-- Stats Widget ****************** -->
 
-  <Stats
-    stats={[
-      { title: 'Downloads last month', amount: `${n_downloads_last_month}`},
-      { title: 'GitHub Stars', amount: `${github_stats.n_stars}` },
-      { title: 'GitHub Forks', amount: `${github_stats.n_forks}` },
-      { title: 'GitHub Watchers', amount: `${github_stats.n_watchers}` },
-    ]}
-  />
+  <!-- Contactus Widget *********** -->
+
+  <CallToAction
+    id='contact-us'
+  >
+
+    <Fragment slot="subtitle">
+      Please contact bryald &lt;at&gt; bas &lt;dot&gt; ac &lt;dot&gt; uk
+    </Fragment>
+  </CallToAction>
+</Layout>
 
 <style>
   .hyperlink{
