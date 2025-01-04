@@ -57,6 +57,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash.merge": "^4.6.9",
     "@types/mdx": "^2.0.13",
+    "@types/react-vertical-timeline-component": "^3.3.6",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
     "astro-compress": "2.3.5",
