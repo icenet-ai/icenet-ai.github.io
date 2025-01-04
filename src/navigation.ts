@@ -34,10 +34,10 @@ export const headerData = {
           text: 'All',
           href: getBlogPermalink(),
         },
-        // {
-        //   text: 'Article',
-        //   href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        // },
+        {
+          text: 'Article',
+          href: getPermalink('jan-25-welcome-blog', 'post'),
+        },
         // {
         //   text: 'Article (with MDX)',
         //   href: getPermalink('markdown-elements-demo-post', 'post'),
