@@ -18,6 +18,8 @@ const contentStyle = {
     zIndex: '10', // Tailwind's intersect-once
   };
 
+const buttonClass = 'w-auto mx-auto py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700'
+
 export default function VerticalTimelineComponent ( timelineData ) {
     // // Destructure items from timelineData
     // const { items } = timelineData;
@@ -31,7 +33,7 @@ export default function VerticalTimelineComponent ( timelineData ) {
       {timelineData.items.map((item, index) => (
         <VerticalTimelineElement
           key={index}
-          className={item.className || "vertical-timeline-element--work"}
+          className={item.className || 'vertical-timeline-element--work'}
           contentStyle={item.contentStyle || contentStyle}
           contentArrowStyle={item.contentArrowStyle || { borderRight: '7px solid rgb(200, 200, 255)' }}
           date={item.date}
@@ -45,6 +47,8 @@ export default function VerticalTimelineComponent ( timelineData ) {
           <h4 className='mt-4 text-muted text-lg'>{item.subtitle}</h4>
           <p>{item.description}</p>
           {item.youtubeURL && <iframe width='100%' height='100%' src={item.youtubeURL} title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe>}
+          <br />
+          {item.link && <a href={item.link} target='_blank' type='button' class={buttonClass}>Open Link</a>}
         </VerticalTimelineElement>
       ))}
     </VerticalTimeline>
