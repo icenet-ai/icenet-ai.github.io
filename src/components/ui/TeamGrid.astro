@@ -39,16 +39,17 @@ const {
     {team.map(({ name, job, image, socials = [], description, classes: itemClasses = {} }) => (
       <div  class={twMerge(
         // `${classes?.panel}`,
-        'relative flex flex-col items-center justify-start intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade team-grid',
-        'mt-28',
-        panelClass as string,
+        // Empty string if team item is empty, otherwise merge the classes
+        (name) ? 'relative flex flex-col items-center justify-start intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade team-grid' : '',
+        (name) ? 'mt-24 md:mt-20' : '',
+        (name) ? panelClass as string : '',
         itemClasses?.panel
       )}>
         <span class="anchor" id={name?.split(' ').join('-').toLowerCase()}></span>
         {/* Image Circle */}
         {(image) && (
           <div class="my-5">
-              <Image src={image?.src} alt={image?.alt ? image.alt : ''} class={twMerge('mb-2 w-10 h-10', 'w-36 h-36 rounded-full object-cover absolute top-[-50%] left-1/2 transform -translate-x-1/2', defaultImageClass as string, itemClasses?.image)} />
+              <Image src={image?.src} alt={image?.alt ? image.alt : ''} class={twMerge('mb-2 w-10 h-10', 'w-36 h-36 rounded-full object-cover absolute top-[-35%] left-1/2 transform -translate-x-1/2', defaultImageClass as string, itemClasses?.image)} />
           </div>
         )}
 
@@ -92,6 +93,7 @@ const {
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(10px);
     filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+    transition: 0.0s;
   }
 
   /* Nothing fancy on touch-screen devices */
@@ -113,8 +115,6 @@ const {
       margin: 0 15px;
       transform: translateY(20px);
       opacity: 1;
-      transition: 0.5s;
-      transition-delay: calc(0.05s*var(--i));
     }
 
     .team-grid:hover .socialicons li:hover {
