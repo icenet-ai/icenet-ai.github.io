@@ -44,10 +44,10 @@ export const headerData = {
         // },
         {
           text: 'News & Impact',
-          href: getPermalink('tutorials', 'category'),
+          href: getPermalink('news', 'category'),
         },
         {
-          text: 'News & Impact',
+          text: 'Tutorials',
           href: getPermalink('tutorials', 'category'),
         },
         {
@@ -82,7 +82,9 @@ export const footerData = {
     {
       title: 'Support',
       links: [
-        { text: 'Docs', href: '#' },
+        { text: 'Documentation', href: '#' },
+        { text: 'Code of conduct', href: 'code-of-conduct' },
+        { text: 'Privacy policy', href: 'privacy' },
       ],
     },
   ],
