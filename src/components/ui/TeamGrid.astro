@@ -37,7 +37,7 @@ const {
       )}
     >
     {team.map(({ name, job, image, socials = [], description, classes: itemClasses = {} }) => (
-      <div class={twMerge(
+      <div id={name?.split(' ').join('-').toLowerCase()} class={twMerge(
         // `${classes?.panel}`,
         'relative flex flex-col items-center justify-start intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade team-grid',
         'mt-28',
