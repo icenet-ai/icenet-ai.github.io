@@ -47,10 +47,11 @@ export default function VerticalTimelineComponent ( timelineData ) {
           <h3 className='font-bold leading-tighter tracking-tighter font-heading text-heading text-xl'>{item.title}</h3>
           <h4 className='mt-4 text-muted text-lg'>{item.subtitle}</h4>
           <p>{item.description}</p>
-          <br />
-          {item.youtubeURL && <iframe width='100%' height='100%' loading="lazy" src={item.youtubeURL} title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe>}
-          <br />
-          {item.link && <a href={item.link} target='_blank' type='button' class={buttonClass}>Open Link</a>}
+          <br></br>
+          {item.youtube &&
+            <a href={'https://www.youtube-nocookie.com/' + item.youtube} target='_blank' type='button' className={buttonClass}>Open YouTube Video</a>
+          }
+          {item.link && <a href={item.link} target='_blank' type='button' className={buttonClass}>Open Link</a>}
         </VerticalTimelineElement>
       ))}
     </VerticalTimeline>

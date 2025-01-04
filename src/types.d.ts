@@ -150,7 +150,7 @@ export interface VerticalTimeLineItem extends Item {
   contentStyle?: string;
   contentArrowStyle?: string;
   iconStyle?: string;
-  youtubeURL?: string;
+  youtube?: string;
 }
 
 export interface Price {
