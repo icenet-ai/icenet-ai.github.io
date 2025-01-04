@@ -1,18 +1,16 @@
 ---
-
 import { METADATA } from 'astrowind:config';
 
-const package_name = METADATA.package.name
-const package_url = METADATA.package.url
-const github_org = METADATA.github.org
-const github_repo  = METADATA.github.repo
-const github_url = `https://github.com/${github_org}/${github_repo}`
-const github_star_url = `https://img.shields.io/github/stars/${github_org}/${github_repo}.svg?style=social&label=Stars&maxAge=86400`
+const package_name = METADATA.package.name;
+const package_url = METADATA.package.url;
+const github_org = METADATA.github.org;
+const github_repo = METADATA.github.repo;
+const github_url = `https://github.com/${github_org}/${github_repo}`;
+const github_star_url = `https://img.shields.io/github/stars/${github_org}/${github_repo}.svg?style=social&label=Stars&maxAge=86400`;
 
-import {fetchPyPIVersion} from '../../utils/custom-utils'
+import { fetchPyPIVersion } from '../../utils/custom-utils';
 
 const latestVersion = await fetchPyPIVersion(package_name, package_url);
-
 ---
 
 <div

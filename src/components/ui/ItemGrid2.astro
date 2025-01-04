@@ -33,42 +33,56 @@ const {
         containerClass
       )}
     >
-    {items.map(({ title, description, link, icon, callToAction, classes: itemClasses = {} }) => (
-      <div class={twMerge(
-        'relative flex flex-col intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade item-grid',
-        panelClass,
-        itemClasses?.panel
-      )}>
-        {link ? (
-          <a href={link} target="_blank" class={linkClass}>
-            {(icon || defaultIcon) && (
-              <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
-            )}
-            <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
-            {description && (
-              <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
-            )}
-          </a>
-        ) : (
-          // If no link is provided, display the content as usual
-          <div class="flex flex-col">
-            {(icon || defaultIcon) && (
-              <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
-            )}
-            <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
-            {description && (
-              <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
-            )}
-          </div>
-        )}
+      {items.map(({ title, description, link, icon, callToAction, classes: itemClasses = {} }) => (
+        <div
+          class={twMerge(
+            'relative flex flex-col intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade item-grid',
+            panelClass,
+            itemClasses?.panel
+          )}
+        >
+          {link ? (
+            <a href={link} target="_blank" class={linkClass}>
+              {(icon || defaultIcon) && (
+                <Icon
+                  name={icon || defaultIcon}
+                  class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)}
+                />
+              )}
+              <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
+              {description && (
+                <p
+                  class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)}
+                  set:html={description}
+                />
+              )}
+            </a>
+          ) : (
+            // If no link is provided, display the content as usual
+            <div class="flex flex-col">
+              {(icon || defaultIcon) && (
+                <Icon
+                  name={icon || defaultIcon}
+                  class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)}
+                />
+              )}
+              <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
+              {description && (
+                <p
+                  class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)}
+                  set:html={description}
+                />
+              )}
+            </div>
+          )}
 
-        {callToAction && (
-          <div class="mt-2">
-            <Button {...callToAction} />
-          </div>
-        )}
-      </div>
-    ))}
+          {callToAction && (
+            <div class="mt-2">
+              <Button {...callToAction} />
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   )
 }

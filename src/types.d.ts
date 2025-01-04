@@ -232,12 +232,10 @@ export interface Hero extends Omit<Headline, 'classes'>, Omit<Widget, 'isDark' |
   backgroundColor?: string;
 }
 
-
 export interface Team extends Omit<Headline, 'classes'>, Widget {
   team?: Array<TeamMember>;
   columns?: number;
 }
-
 
 export interface Stats extends Omit<Headline, 'classes'>, Widget {
   stats?: Array<Stat>;

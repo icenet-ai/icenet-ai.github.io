@@ -8,7 +8,7 @@ import Team from '~/components/widgets/Team.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import VerticalTimeline from '~/components/widgets/VerticalTimeline.astro'
+import VerticalTimeline from '~/components/widgets/VerticalTimeline.astro';
 
 const metadata = {
   title: 'IceNet — AI powered sea-ice forecasting',
@@ -16,26 +16,26 @@ const metadata = {
 };
 
 import { METADATA } from 'astrowind:config';
-import { fetchPyPIDownloadStats, fetchGitHubStats } from '../utils/custom-utils'
+import { fetchPyPIDownloadStats, fetchGitHubStats } from '../utils/custom-utils';
 
-const github_org = METADATA.github.org
-const github_repo  = METADATA.github.repo
+const github_org = METADATA.github.org;
+const github_repo = METADATA.github.repo;
 
 const download_stats = await fetchPyPIDownloadStats(METADATA.package.name.toLowerCase());
-const n_downloads_last_month = download_stats.data.last_month
+const n_downloads_last_month = download_stats.data.last_month;
 const github_stats = await fetchGitHubStats(github_org, github_repo);
 
 import type { ImageMetadata } from 'astro';
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif}')
-
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpeg,jpg,png,gif}');
 ---
+
 <!-- image={{ src: '~/assets/images/hero-image.png', alt: 'Hero Image' }} -->
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
   <Hero
-    id='hero'
+    id="hero"
     actions={[
       {
         variant: 'primary',
@@ -51,14 +51,16 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
       },
       { text: 'About', href: '#about-us' },
     ]}
-    image='/images/hero-image.png'
-    backgroundColor='dark:bg-sky-950'
+    image="/images/hero-image.png"
+    backgroundColor="dark:bg-sky-950"
   >
     <Fragment slot="title">
       <p>AI Powered</p>
       <p>SEA ICE FORECASTS</p>
     </Fragment>
-    Researchers at the British Antarctic Survey and the Alan Turing Institute are using the Dawn supercomputer to forecast daily sea ice concentration maps. This step-change in sea ice forecasting ability brings us closer to conservation tools that mitigate risks associated with rapid sea ice loss.
+    Researchers at the British Antarctic Survey and the Alan Turing Institute are using the Dawn supercomputer to forecast
+    daily sea ice concentration maps. This step-change in sea ice forecasting ability brings us closer to conservation tools
+    that mitigate risks associated with rapid sea ice loss.
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
@@ -66,9 +68,10 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
       >
       <span class="block mb-1 sm:hidden font-bold text-blue-600">IceNet: Sea-Ice Forecasting.</span>
       <span class="sm:hidden">A Python based ecosystem </span>
-      that provides the ability to download, process, train and predict from end to end. <br /> <br />
-      Users can interact with IceNet either via the Python interface or via a set of command-line interfaces (CLI)
-      which provides a high-level interface.
+      that provides the ability to download, process, train and predict from end to end. <br />
+      <br />
+      Users can interact with IceNet either via the Python interface or via a set of command-line interfaces (CLI) which
+      provides a high-level interface.
     </Fragment>
   </Hero>
 
@@ -77,30 +80,50 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
   <Note />
 
   <!-- About IceNet Widget ***************  -->
-  <Hero
-    id='about-us'
-    tagline="About us"
-  >
+  <Hero id="about-us" tagline="About us">
     <Fragment slot="title">
       About IceNet <br />
     </Fragment>
 
     <Fragment slot="subtitle">
       <p>
-        IceNet is a deep learning sea ice forecasting system developed by an <a class="hyperlink" href="https://www.bas.ac.uk/media-post/artificial-intelligence-to-help-predict-arctic-sea-ice-loss/">international team and led by the British Antarctic Survey and The Alan Turing Institute</a>. The original IceNet research model, published in <a class="hyperlink" href="https://www.nature.com/articles/s41467-021-25257-4"><b>Nature Communications</b></a>, was trained on climate simulations and observational data to forecast the next 6 months of monthly-averaged sea ice concentration maps. This version advanced the range of accurate sea ice forecasts, outperforming a state-of-the-art dynamical model (ECMWF SEAS5) in seasonal forecasts of summer sea ice, particularly for extreme sea ice events.
+        IceNet is a deep learning sea ice forecasting system developed by an <a
+          class="hyperlink"
+          href="https://www.bas.ac.uk/media-post/artificial-intelligence-to-help-predict-arctic-sea-ice-loss/"
+          >international team and led by the British Antarctic Survey and The Alan Turing Institute</a
+        >. The original IceNet research model, published in <a
+          class="hyperlink"
+          href="https://www.nature.com/articles/s41467-021-25257-4"><b>Nature Communications</b></a
+        >, was trained on climate simulations and observational data to forecast the next 6 months of monthly-averaged
+        sea ice concentration maps. This version advanced the range of accurate sea ice forecasts, outperforming a
+        state-of-the-art dynamical model (ECMWF SEAS5) in seasonal forecasts of summer sea ice, particularly for extreme
+        sea ice events.
       </p><br />
       <p>
-        Since then, the IceNet team has focused on building an operational version of the model which forecasts on a daily resolution. The <a class="hyperlink" href="https://www.github.com/tom-andersson/icenet-paper">original research code</a> was refactored into <code>icenet</code> - <a class="hyperlink" href="https://github.com/icenet-ai/icenet">a library for operational forecasting</a>. The <code>icenet</code> library can support further research efforts into AI-based operational sea ice forecasting.
+        Since then, the IceNet team has focused on building an operational version of the model which forecasts on a
+        daily resolution. The <a class="hyperlink" href="https://www.github.com/tom-andersson/icenet-paper"
+          >original research code</a
+        > was refactored into <code>icenet</code> - <a class="hyperlink" href="https://github.com/icenet-ai/icenet"
+          >a library for operational forecasting</a
+        >. The <code>icenet</code> library can support further research efforts into AI-based operational sea ice forecasting.
       </p><br />
       <p>
-        In addition, several use cases and an ecosystem of service components are contained within this organization, supporting execution and downstream analysis.
+        In addition, several use cases and an ecosystem of service components are contained within this organization,
+        supporting execution and downstream analysis.
       </p>
-      <p><br />
-        For further information about the team involved, please look at the <a class="hyperlink" href="https://www.bas.ac.uk/project/icenet/">project pages at BAS</a> or <a class="hyperlink" href="https://www.turing.ac.uk/news/artificial-intelligence-help-predict-arctic-sea-ice-loss">The Alan Turing Institute</a>.
+      <p>
+        <br />
+        For further information about the team involved, please look at the <a
+          class="hyperlink"
+          href="https://www.bas.ac.uk/project/icenet/">project pages at BAS</a
+        > or <a
+          class="hyperlink"
+          href="https://www.turing.ac.uk/news/artificial-intelligence-help-predict-arctic-sea-ice-loss"
+          >The Alan Turing Institute</a
+        >.
       </p>
     </Fragment>
   </Hero>
-
 
   <!-- IceNet GitHub Repositories Widget ************** -->
 
@@ -112,14 +135,14 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     items={[
       {
         title: 'icenet-notebooks',
-        description: 'A selection of notebooks to get you started with the icenet library and its usage in various contexts, including it’s use as both a CLI (command-line interface) driven tool and API (application programming interface) library for integration into your own code. The notebooks show usage of the other two repositories.',
+        description:
+          'A selection of notebooks to get you started with the icenet library and its usage in various contexts, including it’s use as both a CLI (command-line interface) driven tool and API (application programming interface) library for integration into your own code. The notebooks show usage of the other two repositories.',
         link: 'https://github.com/icenet-ai/icenet-notebooks',
         icon: 'tabler:notebook',
       },
       {
         title: 'icenet',
-        description:
-          'The core IceNet Python library, including source code documentation.',
+        description: 'The core IceNet Python library, including source code documentation.',
         link: 'https://github.com/icenet-ai/icenet',
         icon: 'tabler:brand-python',
       },
@@ -127,7 +150,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         title: 'icenet-pipeline',
         description:
           'A high-level end-to-end pipeline from data ingestion through to forecast production and upload. It is built on top of the core icenet Python library.',
-          link: 'https://github.com/icenet-ai/icenet-pipeline',
+        link: 'https://github.com/icenet-ai/icenet-pipeline',
         icon: 'tabler:terminal-2',
       },
     ]}
@@ -141,7 +164,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
 
   <Stats
     stats={[
-      { title: 'Downloads last month', amount: `${n_downloads_last_month}`},
+      { title: 'Downloads last month', amount: `${n_downloads_last_month}` },
       { title: 'GitHub Stars', amount: `${github_stats.n_stars}` },
       { title: 'GitHub Forks', amount: `${github_stats.n_forks}` },
       { title: 'GitHub Watchers', amount: `${github_stats.n_watchers}` },
@@ -156,31 +179,28 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     subtitle="Collaborators managing various aspects of the project."
     tagline="Team"
     description="The IceNet project is a collaboration between The Alan Turing Institute and British Antarctic Survey. It is made possible thanks to the contributions of many across the environmental research, data science and international sea-ice and ecosystems communities at large. The names here are only those who continually manage the project, but many more have been responsible for the innovation and research that makes IceNet “an infrastructure for the future”!"
-    team={
-    [
+    team={[
       {
         name: 'Scott Hosking',
         job: 'Principal Investigator',
         description: 'British Antarctic Survey, Alan Turing Institute',
-        image: {src: images['/src/assets/images/team/scott-hosking.jpg'](),
-                alt: 'Picture of Scott'
-              },
+        image: { src: images['/src/assets/images/team/scott-hosking.jpg'](), alt: 'Picture of Scott' },
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://scotthosking.com/'
+            href: 'https://scotthosking.com/',
           },
           {
             icon: 'arcticons:bluesky',
-            href: 'https://bsky.app/profile/scotthosking.bsky.social'
+            href: 'https://bsky.app/profile/scotthosking.bsky.social',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/scotthosking/'
+            href: 'https://www.linkedin.com/in/scotthosking/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/scotthosking/'
+            href: 'https://www.github.com/scotthosking/',
           },
         ],
       },
@@ -188,244 +208,222 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         name: 'James Byrne',
         job: 'Lead Research Software Engineer',
         description: 'British Antarctic Survey',
-        image: {src: images['/src/assets/images/team/james-byrne.jpg'](),
-                alt: 'Picture of James Byrne'
-              },
+        image: { src: images['/src/assets/images/team/james-byrne.jpg'](), alt: 'Picture of James Byrne' },
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://inconsistentrecords.co.uk/'
+            href: 'https://inconsistentrecords.co.uk/',
           },
           {
             icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/jimcircadian'
+            href: 'https://twitter.com/jimcircadian',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/jimcircadian/'
+            href: 'https://www.linkedin.com/in/jimcircadian/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/jimcircadian/'
+            href: 'https://www.github.com/jimcircadian/',
           },
         ],
       },
       {
         name: 'Bryn Noel Ubald',
         job: 'Research Software Engineer',
-        image: {src: images['/src/assets/images/team/bryn-ubald.jpg'](),
-                alt: 'Picture of Bryn'
-              },
+        image: { src: images['/src/assets/images/team/bryn-ubald.jpg'](), alt: 'Picture of Bryn' },
         description: 'British Antarctic Survey',
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://www.brynnoelubald.com/'
+            href: 'https://www.brynnoelubald.com/',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/bryn-noel-ubald/'
+            href: 'https://www.linkedin.com/in/bryn-noel-ubald/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/bnubald/'
+            href: 'https://www.github.com/bnubald/',
           },
         ],
       },
       {
         name: 'Ellie Bowler',
         job: 'Ecosystems Researcher',
-        image: {src: images['/src/assets/images/team/ellie-bowler.jpg'](),
-                alt: 'Picture of Ellie'
-              },
+        image: { src: images['/src/assets/images/team/ellie-bowler.jpg'](), alt: 'Picture of Ellie' },
         description: 'British Antarctic Survey',
         socials: [
           {
             icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/EllieBowler32'
+            href: 'https://twitter.com/EllieBowler32',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/EllieBowler/'
+            href: 'https://www.github.com/EllieBowler/',
           },
         ],
       },
       {
         name: 'Tom Andersson',
         job: 'Original ML Researcher',
-        image: {src: images['/src/assets/images/team/tom-andersson.jpg'](),
-                alt: 'Picture of Tom'
-              },
+        image: { src: images['/src/assets/images/team/tom-andersson.jpg'](), alt: 'Picture of Tom' },
         description: 'Google Deepmind',
         socials: [
           {
             icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/tom_r_andersson'
+            href: 'https://twitter.com/tom_r_andersson',
           },
           {
             icon: 'arcticons:bluesky',
-            href: 'https://app.bsky.cz/profile/tom-andersson.bsky.social'
+            href: 'https://app.bsky.cz/profile/tom-andersson.bsky.social',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/tom-andersson/'
+            href: 'https://www.linkedin.com/in/tom-andersson/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/tom-andersson/'
+            href: 'https://www.github.com/tom-andersson/',
           },
         ],
       },
       {
         name: 'James Robinson',
         job: 'Research Software Engineer',
-        image: {src: images['/src/assets/images/team/james-robinson.jpg'](),
-                alt: 'Picture of James Robinson'
-              },
+        image: { src: images['/src/assets/images/team/james-robinson.jpg'](), alt: 'Picture of James Robinson' },
         description: 'Alan Turing Institute',
         socials: [
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/jamesemrobinson/'
+            href: 'https://www.linkedin.com/in/jamesemrobinson/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/jemrobinson/'
+            href: 'https://www.github.com/jemrobinson/',
           },
         ],
       },
       {
         name: 'Ryan Chan',
         job: 'Research Software Engineer',
-        image: {src: images['/src/assets/images/team/ryan-chan.jpg'](),
-                alt: 'Picture of Ryan'
-              },
+        image: { src: images['/src/assets/images/team/ryan-chan.jpg'](), alt: 'Picture of Ryan' },
         description: 'Alan Turing Institute',
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://rchan26.github.io/'
+            href: 'https://rchan26.github.io/',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/ryan-chan-2607/'
+            href: 'https://www.linkedin.com/in/ryan-chan-2607/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/rchan26/'
+            href: 'https://www.github.com/rchan26/',
           },
         ],
       },
       {
         name: 'Andrew McDonald',
         job: 'PhD Candidate',
-        image: {src: images['/src/assets/images/team/andrew-mcdonald.jpg'](),
-                alt: 'Picture of Andrew'
-              },
+        image: { src: images['/src/assets/images/team/andrew-mcdonald.jpg'](), alt: 'Picture of Andrew' },
         description: 'University of Cambridge',
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://ampersandmcd.com/'
+            href: 'https://ampersandmcd.com/',
           },
           {
             icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/ampersandmcd'
+            href: 'https://twitter.com/ampersandmcd',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/ampersandmcd/'
+            href: 'https://www.linkedin.com/in/ampersandmcd/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/ampersandmcd/'
+            href: 'https://www.github.com/ampersandmcd/',
           },
         ],
       },
       {
         name: 'Peter Yatsyshin',
         job: 'TRF Research Fellow',
-        image: {src: images['/src/assets/images/team/peter-yatsyshin.jpg'](),
-                alt: 'Picture of Peter'
-              },
+        image: { src: images['/src/assets/images/team/peter-yatsyshin.jpg'](), alt: 'Picture of Peter' },
         description: 'Alan Turing Institute',
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://www.yatsyshin.com/'
+            href: 'https://www.yatsyshin.com/',
           },
           {
             icon: 'arcticons:google',
-            href: 'https://scholar.google.co.uk/citations?hl=en&user=3lNjiWYAAAAJ'
+            href: 'https://scholar.google.co.uk/citations?hl=en&user=3lNjiWYAAAAJ',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/peter-yatsyshin-phd/'
+            href: 'https://www.linkedin.com/in/peter-yatsyshin-phd/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/pyatsysh/'
+            href: 'https://www.github.com/pyatsysh/',
           },
         ],
       },
       {
         name: 'Alden Conner',
         job: 'Research Application Manager',
-        image: {src: images['/src/assets/images/team/alden-conner.jpg'](),
-                alt: 'Picture of Alden'
-              },
+        image: { src: images['/src/assets/images/team/alden-conner.jpg'](), alt: 'Picture of Alden' },
         socials: [
           {
             icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/alden_tweets'
+            href: 'https://twitter.com/alden_tweets',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/aldenconner'
+            href: 'https://www.linkedin.com/in/aldenconner',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/aldenc/'
+            href: 'https://www.github.com/aldenc/',
           },
         ],
       },
       {
         name: 'Luigi Tommaso Luppino',
         job: 'ML Researcher',
-        image: {src: images['/src/assets/images/team/luigi-luppino.jpg'](),
-                alt: 'Picture of Luigi'
-              },
+        image: { src: images['/src/assets/images/team/luigi-luppino.jpg'](), alt: 'Picture of Luigi' },
         description: 'UiT the Arctic University of Norway',
         socials: [
           {
             icon: 'arcticons:earth',
-            href: 'https://sites.google.com/view/luppino/home?authuser=0'
+            href: 'https://sites.google.com/view/luppino/home?authuser=0',
           },
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/luigi-tommaso-luppino-337436158/'
+            href: 'https://www.linkedin.com/in/luigi-tommaso-luppino-337436158/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/llu025/'
+            href: 'https://www.github.com/llu025/',
           },
         ],
       },
       {
         name: 'Lars Uebbing',
         job: 'PhD Candidate',
-        image: {src: images['/src/assets/images/team/lars-uebbing.jpg'](),
-                alt: 'Picture of Lars'
-              },
+        image: { src: images['/src/assets/images/team/lars-uebbing.jpg'](), alt: 'Picture of Lars' },
         description: 'UiT the Arctic University of Norway',
         socials: [
           {
             icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/lars-uebbing-b64662213/'
+            href: 'https://www.linkedin.com/in/lars-uebbing-b64662213/',
           },
           {
             icon: 'arcticons:github',
-            href: 'https://www.github.com/laueb4818/'
+            href: 'https://www.github.com/laueb4818/',
           },
         ],
       },
@@ -451,37 +449,39 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     title="IceNet Outputs"
     subtitle="A list of publications, videos and presentations around IceNet and it's infrastructure."
     tagline="Outputs"
-    items={
-    [
+    items={[
       {
         date: '2024',
         title: 'Alan Turing Institute EDSBook publication',
         subtitle: '',
         description: 'Publication of IceNet usage notebook in the Alan Turing Institute EDSBook',
         link: 'https://edsbook.org/notebooks/gallery/67a1e320-7c47-4ea9-8df8-e868326bc90b/notebook',
-        icon: 'tabler:notebook'
+        icon: 'tabler:notebook',
       },
       {
         date: '2023',
         title: 'Some reasoning about AI approaches',
         subtitle: '',
-        description: 'Scott Hosking of BAS and The Alan Turing Institute highlighting the importance of AI approaches on Al Jazeera.',
+        description:
+          'Scott Hosking of BAS and The Alan Turing Institute highlighting the importance of AI approaches on Al Jazeera.',
         youtube: 'ILkdToflkZ4',
-        icon: 'tabler:ai'
+        icon: 'tabler:ai',
       },
       {
         date: '2023',
         title: 'Climate Informatics',
         subtitle: '',
-        description: 'James Byrne described how the IceNet project used software engineering to operationalise research for climate science at Climate Informatics 2023.',
+        description:
+          'James Byrne described how the IceNet project used software engineering to operationalise research for climate science at Climate Informatics 2023.',
         youtube: 'sfmVOaR_YCg',
-        icon: 'gis:weather-map'
+        icon: 'gis:weather-map',
       },
       {
         date: '2023',
         title: 'AI UK',
         subtitle: '',
-        description: 'Demonstration of the original proof of concept pipeline approach online for AI UK 2022 with James Byrne and James Robinson.',
+        description:
+          'Demonstration of the original proof of concept pipeline approach online for AI UK 2022 with James Byrne and James Robinson.',
         youtube: 'KqnHCAec0Zg',
         icon: 'tabler:brain',
       },
@@ -491,7 +491,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         subtitle: '',
         description: 'Tom Andersson describing IceNet.',
         youtube: 'lzJA7r0oNcg',
-        icon: 'emojione-monotone:flag-for-antarctica'
+        icon: 'emojione-monotone:flag-for-antarctica',
       },
       {
         date: '2021',
@@ -499,7 +499,7 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         subtitle: '',
         description: 'A detailed walkthrough the research.',
         youtube: 'JAKWhEU09Xo',
-        icon: 'fluent:video-20-regular'
+        icon: 'fluent:video-20-regular',
       },
       {
         date: '2021',
@@ -507,26 +507,20 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         subtitle: '',
         description: 'Tom Andersson’s original IceNet research paper, published in Nature Communications',
         link: 'https://www.nature.com/articles/s41467-021-25257-4',
-        icon: 'mingcute:paper-line'
+        icon: 'mingcute:paper-line',
       },
-      ]}
-      >
-  </VerticalTimeline>
+    ]}
+  />
 
   <!-- Contactus Widget *********** -->
 
-  <CallToAction
-    id='contact-us'
-  >
-
-    <Fragment slot="subtitle">
-      Please contact bryald &lt;at&gt; bas &lt;dot&gt; ac &lt;dot&gt; uk
-    </Fragment>
+  <CallToAction id="contact-us">
+    <Fragment slot="subtitle"> Please contact bryald &lt;at&gt; bas &lt;dot&gt; ac &lt;dot&gt; uk </Fragment>
   </CallToAction>
 </Layout>
 
 <style>
-  .hyperlink{
+  .hyperlink {
     color: #3366cc;
   }
 </style>
