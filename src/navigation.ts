@@ -35,8 +35,8 @@ export const headerData = {
           href: getBlogPermalink(),
         },
         {
-          text: 'Article',
-          href: getPermalink('jan-25-welcome-blog', 'post'),
+          text: 'Welcome!',
+          href: getPermalink('jan25-welcome-blog', 'post'),
         },
         // {
         //   text: 'Article (with MDX)',
