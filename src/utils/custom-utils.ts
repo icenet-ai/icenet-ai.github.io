@@ -40,6 +40,15 @@ try {
     const response = await fetch(pypistats_url, { mode: 'no-cors' });
     const data = await response.json();
     return data;
+    // return {
+    //     data: {
+    //       last_day: NaN,
+    //       last_month: NaN,
+    //       last_week: NaN
+    //     },
+    //     package: package_name,
+    //     type: "recent_downloads"
+    //   };
 } catch (error) {
     console.error('Error fetching ' + package_name + ' download stats:', error);
     return {
@@ -70,4 +79,9 @@ export async function fetchGitHubStats(github_org: string, github_repo: string):
         n_forks: github_data.forks_count,
         n_watchers: github_data.subscribers_count
     }
+    // return {
+    //     n_stars: NaN,
+    //     n_forks: NaN,
+    //     n_watchers: NaN
+    // }
 }
