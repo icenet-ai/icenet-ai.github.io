@@ -143,6 +143,15 @@ export interface Item {
   image?: Image;
 }
 
+export interface VerticalTimeLineItem extends Item {
+  date?: string;
+  subtitle?: subtitle;
+  className?: string;
+  contentStyle?: string;
+  contentArrowStyle?: string;
+  iconStyle?: string;
+}
+
 export interface Price {
   title?: string;
   subtitle?: string;
@@ -289,3 +298,7 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface VerticalTimeLine extends Omit<Headline, 'classes'>, Widget {
+  items?: Array<VerticalTimeLineItem>;
+}

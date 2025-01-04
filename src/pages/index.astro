@@ -8,6 +8,7 @@ import Team from '~/components/widgets/Team.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import VerticalTimeline from '~/components/widgets/VerticalTimeline.astro'
 
 const metadata = {
   title: 'IceNet — AI powered sea-ice forecasting',
@@ -30,7 +31,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
 
 ---
 <!-- image={{ src: '~/assets/images/hero-image.png', alt: 'Hero Image' }} -->
-
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
@@ -443,6 +443,67 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
                 `}
   />
 
+  <!-- VerticalTimeline Widget  *******  -->
+
+  <VerticalTimeline
+    id="output-timeline"
+    title="IceNet Outputs"
+    subtitle="A list of publications, videos and presentations around IceNet and it's infrastructure."
+    tagline="Outputs"
+    items={
+    [
+      {
+        date: '2024',
+        title: 'Alan Turing Institute EDSBook publication',
+        subtitle: '',
+        description: 'Publication of IceNet usage notebook in the Alan Turing Institute EDSBook',
+        icon: 'tabler:notebook'
+      },
+      {
+        date: '2023',
+        title: 'Some reasoning about AI approaches',
+        subtitle: '',
+        description: 'Scott Hosking of BAS and The Alan Turing Institute highlighting the importance of AI approaches on Al Jazeera.',
+        icon: 'tabler:ai'
+      },
+      {
+        date: '2023',
+        title: 'Climate Informatics',
+        subtitle: '',
+        description: 'James Byrne described how the IceNet project used software engineering to operationalise research for climate science at Climate Informatics 2023.',
+        icon: 'gis:weather-map'
+      },
+      {
+        date: '2023',
+        title: 'AI UK',
+        subtitle: '',
+        description: 'Demonstration of the original proof of concept pipeline approach online for AI UK 2022 with James Byrne and James Robinson.',
+        icon: 'tabler:brain',
+      },
+      {
+        date: '2021',
+        title: 'Predicting Sea Ice using AI - a general introduction',
+        subtitle: '',
+        description: 'Tom Andersson describing IceNet.',
+        icon: 'emojione-monotone:flag-for-antarctica'
+      },
+      {
+        date: '2021',
+        title: 'Seasonal Arctic sea ice forecasting with probabilistic deep learning',
+        subtitle: '',
+        description: 'A detailed walkthrough the research.',
+        icon: 'fluent:video-20-regular'
+      },
+      {
+        date: '2021',
+        title: 'The original research paper',
+        subtitle: '',
+        description: 'Tom Andersson’s original IceNet research paper, published in Nature Communications',
+        icon: 'mingcute:paper-line'
+      },
+      ]}
+      >
+  </VerticalTimeline>
 
   <!-- Contactus Widget *********** -->
 
