@@ -29,6 +29,7 @@ export default function VerticalTimelineComponent ( timelineData ) {
     <VerticalTimeline
         layout='2-columns'
         lineColor='grey'
+        animate={false}
     >
       {timelineData.items.map((item, index) => (
         <VerticalTimelineElement
@@ -46,7 +47,8 @@ export default function VerticalTimelineComponent ( timelineData ) {
           <h3 className='font-bold leading-tighter tracking-tighter font-heading text-heading text-xl'>{item.title}</h3>
           <h4 className='mt-4 text-muted text-lg'>{item.subtitle}</h4>
           <p>{item.description}</p>
-          {item.youtubeURL && <iframe width='100%' height='100%' src={item.youtubeURL} title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe>}
+          <br />
+          {item.youtubeURL && <iframe width='100%' height='100%' loading="lazy" src={item.youtubeURL} title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen></iframe>}
           <br />
           {item.link && <a href={item.link} target='_blank' type='button' class={buttonClass}>Open Link</a>}
         </VerticalTimelineElement>
