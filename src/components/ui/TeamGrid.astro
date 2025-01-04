@@ -37,13 +37,14 @@ const {
       )}
     >
     {team.map(({ name, job, image, socials = [], description, classes: itemClasses = {} }) => (
-      <div id={name?.split(' ').join('-').toLowerCase()} class={twMerge(
+      <div  class={twMerge(
         // `${classes?.panel}`,
         'relative flex flex-col items-center justify-start intersect-once intersect-quarter intercept-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade team-grid',
         'mt-28',
         panelClass as string,
         itemClasses?.panel
       )}>
+        <span class="anchor" id={name?.split(' ').join('-').toLowerCase()}></span>
         {/* Image Circle */}
         {(image) && (
           <div class="my-5">
@@ -120,5 +121,13 @@ const {
       transform: translateY(20px) scale(1.5);
       opacity: 1;
     }
+  }
+
+  /* Anchor to fix hyperlinking not centering on individual team members cards */
+  .anchor{
+    display: block;
+    height: 50vh; /*same height as header*/
+    margin-top: -50vh; /*same height as header*/
+    visibility: hidden;
   }
 </style>
