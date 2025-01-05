@@ -42,18 +42,18 @@ export const headerData = {
         //   text: 'Article (with MDX)',
         //   href: getPermalink('markdown-elements-demo-post', 'post'),
         // },
-        {
-          text: 'News & Impact',
-          href: getPermalink('news', 'category'),
-        },
-        {
-          text: 'Tutorials',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Releases',
-          href: getPermalink('releases', 'category'),
-        },
+        // {
+        //   text: 'News & Impact',
+        //   href: getPermalink('news', 'category'),
+        // },
+        // {
+        //   text: 'Tutorials',
+        //   href: getPermalink('tutorials', 'category'),
+        // },
+        // {
+        //   text: 'Releases',
+        //   href: getPermalink('releases', 'category'),
+        // },
         // {
         //   text: 'Tag Page',
         //   href: getPermalink('astro', 'tag'),
