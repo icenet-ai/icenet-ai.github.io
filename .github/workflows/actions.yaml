@@ -18,8 +18,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository using git
+      - name: Checkout this repository using git
         uses: actions/checkout@v4
+      - name: Fetch icenet and install repository and dependencies for docs
+        run: |
+          git clone https://github.com/icenet-ai/icenet.git
+          cd icenet
+          pip install .
+          cd docs
+          pip install -r requirements.txt
+          make html
+          cd ../..
+      - name: Copy Sphinx docs across
+        run: |
+          cp -r icenet/docs/_build/html/ public/docs/
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:
