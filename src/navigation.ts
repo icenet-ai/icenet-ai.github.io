@@ -82,9 +82,9 @@ export const footerData = {
     {
       title: 'Support',
       links: [
-        { text: 'Documentation', href: '#' },
-        { text: 'Code of conduct', href: 'code-of-conduct' },
-        { text: 'Privacy policy', href: 'privacy' },
+        { text: 'Documentation', href: '/docs' },
+        { text: 'Code of conduct', href: '/code-of-conduct' },
+        { text: 'Privacy policy', href: '/privacy' },
       ],
     },
   ],
