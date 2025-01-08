@@ -45,7 +45,7 @@ export default function VerticalTimelineComponent(timelineData) {
           <br></br>
           {item.youtube && (
             <a
-              href={'https://www.youtube-nocookie.com/' + item.youtube}
+              href={'https://www.youtube.com/watch?v=' + item.youtube}
               target="_blank"
               type="button"
               className={buttonClass}
