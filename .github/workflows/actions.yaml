@@ -20,8 +20,14 @@ jobs:
     steps:
       - name: Checkout this repository using git
         uses: actions/checkout@v4
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          init-shell: >-
+            bash
+          post-cleanup: 'all'
       - name: Fetch icenet and install repository and dependencies for docs
         run: |
+          micromamba install -y -c conda-forge netcdf4
           git clone https://github.com/icenet-ai/icenet.git
           cd icenet
           pip install .
