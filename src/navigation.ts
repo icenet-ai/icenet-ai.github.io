@@ -61,7 +61,7 @@ export const headerData = {
       ],
     },
   ],
-  actions: [{ text: 'Download', href: 'https://pypi.org/project/icenet/', target: '_blank' }],
+  actions: [{ text: 'Documentation', href: 'docs/', target: '_blank' }],
 };
 
 export const footerData = {
