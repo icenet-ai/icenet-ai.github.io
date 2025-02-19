@@ -30,7 +30,7 @@ jobs:
           micromamba install -y -c conda-forge netcdf4=1.6.0
           eval "$(micromamba shell hook --shell bash)"
           micromamba activate base
-          git clone https://github.com/icenet-ai/icenet.git
+          git clone --recurse-submodules https://github.com/icenet-ai/icenet.git
           cd icenet
           pip install .
           cd docs
