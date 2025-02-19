@@ -32,8 +32,8 @@ jobs:
           micromamba activate base
           git clone https://github.com/icenet-ai/icenet.git
           cd icenet
-          git submodule sync --recursive
-          git -c protocol.version=2 submodule update --init --force --depth=1 --recursive
+          git submodule set-url notebooks https://github.com/icenet-ai/icenet-notebooks.git
+          git submodule update --init
           pip install .
           cd docs
           pip install -r requirements.txt
