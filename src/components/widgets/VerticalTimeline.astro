@@ -1,23 +1,88 @@
 ---
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
-import type { VerticalTimeLine as Props } from '~/types';
-import VerticalTimelineComponent from '~/components/ui/VerticalTimeline.jsx';
 
 const {
-  title = await Astro.slots.render('title'),
-  subtitle = await Astro.slots.render('subtitle'),
-  tagline = await Astro.slots.render('tagline'),
-  items = [],
-
   id,
+  title = '',
+  subtitle = '',
+  tagline = '',
+  items = [],
   isDark = false,
   classes = {},
-  bg = await Astro.slots.render('bg'),
+  bg = null,
 } = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
-  <VerticalTimelineComponent items={items} client:only="react" />
-</WidgetWrapper>
+<script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+
+<!-- Using following for animations
+ https://github.com/usaljs/usal -->
+<script src="https://cdn.jsdelivr.net/npm/usal@latest/usal.min.js"></script>
+
+<section id={id} class={`vertical-timeline max-w-7xl mx-auto px-6 ${classes.container ?? ''}`}>
+  <div class="max-w-3xl mb-8 md:mb-12 md:mx-auto">
+    <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+    <div class="relative">
+      {/* Center vertical line */}
+      <div class="absolute left-1/2 top-0 transform -translate-x-1/2 w-1 bg-gray-300 dark:bg-slate-700 h-full"></div>
+
+      {items.map((item, index) => {
+        const isLeft = index % 2 === 0;
+        return (
+          <div
+            key={index}
+            class={`mb-10 w-full flex flex-col md:flex-row items-center relative
+              ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+            style="min-height: 120px;"
+	    data-usal="fade-u once"
+          >
+            {/* Dot + Icon */}
+            <div class="absolute left-1/2 top-5 transform -translate-x-1/2 rounded-full bg-blue-600 ring-8 ring-white dark:ring-slate-900 dark:bg-blue-400 w-9 h-9 flex items-center justify-center z-10">
+              <iconify-icon icon={item.icon} width="28" height="28" class="text-white"></iconify-icon>
+            </div>
+
+            {/* Content */}
+            <div
+              class={`bg-white dark:bg-slate-900 border border-gray-300 dark:border-slate-700 rounded-lg p-6 shadow-md w-full md:w-5/12
+                ${isLeft ? 'md:mr-auto md:text-left' : 'md:ml-auto md:text-right'}`}
+            >
+              <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500 block">
+                {item.date}
+              </time>
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+              {item.subtitle && (
+                <p class="mb-2 text-sm font-normal text-gray-500 dark:text-gray-400">{item.subtitle}</p>
+              )}
+              <p class="mb-2 text-base font-normal text-gray-700 dark:text-gray-300">{item.description}</p>
+
+              <div class="flex space-x-2 justify-start md:justify-start">
+                {item.youtube && (
+                  <a
+                    href={`https://www.youtube.com/watch?v=${item.youtube}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                  >
+                    YouTube Video
+                  </a>
+                )}
+                {item.link && (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
+                  >
+                    Open Link
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
