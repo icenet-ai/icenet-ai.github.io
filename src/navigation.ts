@@ -22,6 +22,10 @@ export const headerData = {
           href: getPermalink('/#team-members'),
         },
         {
+          text: 'Outputs',
+          href: getPermalink('/#output-timeline'),
+        },
+        {
           text: 'Contact',
           href: getPermalink('/#contact-us'),
         },
