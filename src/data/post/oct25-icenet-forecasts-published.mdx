@@ -1,0 +1,79 @@
+---
+publishDate: 2025-10-07T00:00:00Z
+author: Bryn Noel Ubald
+title: Operational IceNet Forecasts Now Publicly Accessible!
+excerpt: IceNet forecasts are now available on the PDC's RAMADDA platform.
+image: https://images.unsplash.com/photo-1598439210625-5067c578f3f6?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+category: Article
+tags:
+  - news
+metadata:
+  canonical: https://astrowind.vercel.app/astrowind-template-in-depth
+---
+
+import DListItem from '~/components/ui/DListItem.astro';
+import ToggleTheme from '~/components/common/ToggleTheme.astro';
+
+We are thrilled to announce that the Polar Data Centre's [RAMADDA data repository](https://ramadda.data.bas.ac.uk/repository/a/icenet-daily-sea-ice-forecasts) is now home to daily IceNet forecasts! This platform now enables a wide range of end-users to access these forecasts. With automated inclusion of latest forecasts as they are generated on a daily basis.
+
+Use-cases could involve:
+
+- Empowering researchers/students in research
+- Informing policymakers
+- Navigation of ships in polar regions
+- Environmental monitoring
+
+**Please note that IceNet forecasts are highly experimental and is a research codebase**
+
+<a href="https://ramadda.data.bas.ac.uk/repository/a/icenet-daily-sea-ice-forecasts" target="_blank">Explore IceNet on RAMADDA</a>
+
+### Why This Matters
+Sea ice plays a critical role in global climate systems, influencing ocean currents, wildlife habitats, and human activities like shipping. IceNet forecasts can enable users to visualise and analyse daily forecasts of sea-ice.
+
+### Join Us in Exploring the Polar Regions
+Whether you're a scientist, student, or simply curious about Earth's changing environment, we invite you to dive into IceNet forecasts via RAMADDA.
+
+
+## Model definition
+
+The current release of the forecasts contain daily sea ice forecasts across the northern and southern hemispheres (via two separate models) derived from OSI-SAF 25km<sup>2</sup> grid used as ground truth. They are labelled as `exp23_north` and `exp23_south`, and forecast up to 93 days ahead, with a roughly 5-7 day delay depending on ERA5 data release cycle.
+
+These models were trained using [icenet v0.2.4_dev](https://pypi.org/project/icenet/0.2.4/) on the British Antarctic Survey's internal HPC (BAS HPC) with the following input variables:
+
+* ERA5
+  * psl
+  * ta500
+  * tas
+  * tos
+  * uas
+  * vas
+  * zg250
+  * zg500
+* OSI-SAF
+  * siconca (also, the target variable)
+
+### Train splits
+The date ranges used for training are as follows:
+* 1994-01-01 to 1995-12-31
+* 2006-01-01 to 2008-12-31
+* 2011-01-01 to 2013-12-31
+
+### Validation splits
+The date ranges used for validation are as follows:
+* 2009-07-01 to 2010-06-30
+
+### Prediction
+
+The predictions are generated using [icenet v0.2.9](https://pypi.org/project/icenet/0.2.9/), also on BAS HPC.
+
+### License
+
+Unless otherwise stated, all content is owned by British Antarctic Survey and The Alan Turing Institute 2025, and made available via the [Open Government License](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/) which is compatible with the [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
+
+## Future
+
+In the future, RAMADDA will also host IceNet forecasts from different models:
+- AMSR2 sea-ice based predictions.
+- Monthly predictions, up to 6 months ahead.
+- Fine-tuned models combining OSI-SAF and AMSR2 training.
+
