@@ -36,7 +36,7 @@ interface PypiStatsApiResponse {
 export async function fetchPyPIDownloadStats(package_name: string): Promise<PypiStatsApiResponse> {
   try {
     const pypistats_url =
-      'https://api.allorigins.win/raw?url=' + 'https://pypistats.org/api/packages/' + package_name + '/recent';
+      'https://pypistats.org/api/packages/' + package_name + '/recent';
     const response = await fetch(pypistats_url, { mode: 'no-cors' });
     const data = await response.json();
     return data;
