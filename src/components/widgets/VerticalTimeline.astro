@@ -58,14 +58,16 @@ const {
 
               <div class="flex space-x-2 justify-start md:justify-start">
                 {item.youtube && (
-                  <a
-                    href={`https://www.youtube.com/watch?v=${item.youtube}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-block rounded bg-white px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
-                  >
-                    YouTube Video
-                  </a>
+                  <div class="mt-4 aspect-video w-full rounded-lg overflow-hidden shadow-lg">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${item.youtube}`}
+                      title="YouTube video"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowfullscreen
+                      loading="lazy"
+                      class="w-full h-full border-0"
+                    ></iframe>
+                  </div>
                 )}
                 {item.link && (
                   <a
