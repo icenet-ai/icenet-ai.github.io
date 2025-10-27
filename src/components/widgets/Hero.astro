@@ -18,12 +18,14 @@ const {
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
 
-const background_image_style =
-  image !== null
-    ? // ? "background-color: #020e59; background-repeat: no-repeat; background-position: center ; background-image: url(" + image + "); background-size: cover;"
-      'background-repeat: no-repeat; background-position: center ; background-image: url(' +
-      image +
-      '); background-size: cover;'
+const background_image_class =
+  image !== undefined
+    ? 'after:absolute after:inset-0 dark:after:bg-gradient-to-b dark:after:from-transparent dark:after:to-black'
+    : '';
+
+const background_text_style =
+  image !== undefined
+    ? 'z-10 bg-gray-200/40 dark:bg-gray-500/20 rounded-lg backdrop-blur-xs'
     : '';
 
 const headerHeight_sm = '72px';
@@ -31,41 +33,33 @@ const headerHeight_md = '112px';
 const headerHeight_lg = '140px';
 ---
 
-<section class=`relative md:-mt-[76px] not-prose ${backgroundColor}` {...id ? { id } : {}}>
+<section class="relative md:-mt-[76px] not-prose ${backgroundColor}" {...id ? { id } : {}}>
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <slot name="bg">
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
   </div>
-  <div class="relative mx-auto px-4 sm:px-6" style={background_image_style}>
+  <div
+    class={`relative mx-auto px-4 sm:px-6 bg-center bg-no-repeat bg-cover ${background_image_class}`}
+    style={`background-image: url(${image}); background-size: cover;`}
+  >
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
-    <div
-      class=`min-h-[82.5vh] sm:min-h-[calc(100vh-${headerHeight_sm})] md:min-h-[calc(100vh-${headerHeight_md}-76px)] lg:min-h-[calc(100vh-${headerHeight_lg})]`
-    >
-      <div class="text-center pb-10 md:pb-16 md:pt-16 max-w-5xl md:mt-5 m-auto">
+    <div class="min-h-[82.5vh] sm:min-h-[calc(100vh-${headerHeight_sm})] md:min-h-[calc(100vh-${headerHeight_md}-76px)] lg:min-h-[calc(100vh-${headerHeight_lg})]">
+      <div class={`text-center p-10 md:p-12 max-w-5xl md:mt-5 m-auto relative ${background_text_style}`}>
         {
           tagline && (
-            <p
-              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-              set:html={tagline}
-            />
+            <p class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade" set:html={tagline} />
           )
         }
         {
           title && (
-            <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-              set:html={title}
-            />
+            <h1 class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-white text-shadow-sm intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade" set:html={title} />
           )
         }
         <div class="max-w-3xl mx-auto">
           {
             subtitle && (
-              <p
-                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
-                set:html={subtitle}
-              />
+              <p class="text-xl mb-6 dark:text-white intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade" set:html={subtitle} />
             )
           }
           {
@@ -74,7 +68,7 @@ const headerHeight_lg = '140px';
                 {Array.isArray(actions) ? (
                   actions.map((action) => (
                     <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
+                      <Button {...(action || {})} class="w-full sm:mb-0 text-white bg-primary dark:bg-primary-light hover:bg-primary-dark dark:hover:bg-primary-dark" />
                     </div>
                   ))
                 ) : (
@@ -89,3 +83,4 @@ const headerHeight_lg = '140px';
     </div>
   </div>
 </section>
+
