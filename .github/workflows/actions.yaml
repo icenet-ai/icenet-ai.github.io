@@ -7,6 +7,10 @@ on:
     branches: [ main ]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+  schedule:
+    # Run at 00:00 UTC on the first day of every month
+    # Updates pypi + GitHub stats
+    - cron: '0 0 1 * *'
 
 # Cancel any previous in-progress actions
 concurrency:
