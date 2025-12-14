@@ -296,30 +296,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         ],
       },
       {
-        name: 'Tom Andersson',
-        job: 'Original ML Researcher',
-        image: { src: images['/src/assets/images/team/tom-andersson.jpg'](), alt: 'Picture of Tom' },
-        description: 'Google Deepmind',
-        socials: [
-          {
-            icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/tom_r_andersson',
-          },
-          {
-            icon: 'arcticons:bluesky',
-            href: 'https://app.bsky.cz/profile/tom-andersson.bsky.social',
-          },
-          {
-            icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/tom-andersson/',
-          },
-          {
-            icon: 'arcticons:github',
-            href: 'https://www.github.com/tom-andersson/',
-          },
-        ],
-      },
-      {
         name: 'James Robinson',
         job: 'Research Software Engineer',
         image: { src: images['/src/assets/images/team/james-robinson.jpg'](), alt: 'Picture of James Robinson' },
@@ -332,26 +308,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
           {
             icon: 'arcticons:github',
             href: 'https://www.github.com/jemrobinson/',
-          },
-        ],
-      },
-      {
-        name: 'Ryan Chan',
-        job: 'Research Software Engineer',
-        image: { src: images['/src/assets/images/team/ryan-chan.jpg'](), alt: 'Picture of Ryan' },
-        description: 'Alan Turing Institute',
-        socials: [
-          {
-            icon: 'arcticons:earth',
-            href: 'https://rchan26.github.io/',
-          },
-          {
-            icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/ryan-chan-2607/',
-          },
-          {
-            icon: 'arcticons:github',
-            href: 'https://www.github.com/rchan26/',
           },
         ],
       },
@@ -420,25 +376,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         ],
       },
       {
-        name: 'Alden Conner',
-        job: 'Research Application Manager',
-        image: { src: images['/src/assets/images/team/alden-conner.jpg'](), alt: 'Picture of Alden' },
-        socials: [
-          {
-            icon: 'arcticons:x-twitter',
-            href: 'https://twitter.com/alden_tweets',
-          },
-          {
-            icon: 'arcticons:linkedin',
-            href: 'https://www.linkedin.com/in/aldenconner',
-          },
-          {
-            icon: 'arcticons:github',
-            href: 'https://www.github.com/aldenc/',
-          },
-        ],
-      },
-      {
         name: 'Luigi Tommaso Luppino',
         job: 'ML Researcher',
         image: { src: images['/src/assets/images/team/luigi-luppino.jpg'](), alt: 'Picture of Luigi' },
@@ -481,6 +418,106 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </Team>
+
+
+  <!-- Former Team Members Widget *************** -->
+
+  <div class="flex justify-center">
+    <div class="space-y-4">
+      <!-- Button to toggle collapsible content -->
+      <button
+        id="toggle-button"
+        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-200"
+        onclick="toggleCollapsible()">
+        Former Contributors
+      </button>
+    </div>
+  </div>
+
+  <!-- Collapsible former contributors content -->
+  <div
+    id="collapsible-content"
+    class="transition-all duration-300 ease-in-out overflow-hidden max-h-0 bg-gray-100 p-4 rounded-md mt-2"
+    style="max-height: 0; background-color: transparent;">
+
+    <Team
+      id="former-team-members"
+      description="The IceNet project is a collaboration between multiple institutions. It is made possible thanks to the open-source contributions of many academic and industrial organisations. The names here are only those who continually manage the project, but many more have been responsible for the innovation and research!"
+      style=""
+      team={
+      [
+        {
+          name: 'Tom Andersson',
+          job: 'Original ML Researcher',
+          image: { src: images['/src/assets/images/team/tom-andersson.jpg'](), alt: 'Picture of Tom' },
+          description: 'Google Deepmind',
+          socials: [
+            {
+              icon: 'arcticons:x-twitter',
+              href: 'https://twitter.com/tom_r_andersson',
+            },
+            {
+              icon: 'arcticons:bluesky',
+              href: 'https://app.bsky.cz/profile/tom-andersson.bsky.social',
+            },
+            {
+              icon: 'arcticons:linkedin',
+              href: 'https://www.linkedin.com/in/tom-andersson/',
+            },
+            {
+              icon: 'arcticons:github',
+              href: 'https://www.github.com/tom-andersson/',
+            },
+          ],
+        },
+        {
+          name: 'Ryan Chan',
+          job: 'Research Software Engineer',
+          image: { src: images['/src/assets/images/team/ryan-chan.jpg'](), alt: 'Picture of Ryan' },
+          description: 'Alan Turing Institute',
+          socials: [
+            {
+              icon: 'arcticons:earth',
+              href: 'https://rchan26.github.io/',
+            },
+            {
+              icon: 'arcticons:linkedin',
+              href: 'https://www.linkedin.com/in/ryan-chan-2607/',
+            },
+            {
+              icon: 'arcticons:github',
+              href: 'https://www.github.com/rchan26/',
+            },
+          ],
+        },
+        {
+          name: 'Alden Conner',
+          job: 'Research Application Manager',
+          image: { src: images['/src/assets/images/team/alden-conner.jpg'](), alt: 'Picture of Alden' },
+          socials: [
+            {
+              icon: 'arcticons:x-twitter',
+              href: 'https://twitter.com/alden_tweets',
+            },
+            {
+              icon: 'arcticons:linkedin',
+              href: 'https://www.linkedin.com/in/aldenconner',
+            },
+            {
+              icon: 'arcticons:github',
+              href: 'https://www.github.com/aldenc/',
+            },
+          ],
+        },
+      ]}
+    >
+      <Fragment slot="bg">
+        <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+      </Fragment>
+    </Team>
+
+  </div>
+
 
   <!-- VerticalTimeline Widget  *******  -->
 
@@ -566,6 +603,17 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
     <Fragment slot="subtitle"> Please contact bryald &lt;at&gt; bas &lt;dot&gt; ac &lt;dot&gt; uk </Fragment>
   </CallToAction>
 </Layout>
+
+<script is:inline>
+  function toggleCollapsible() {
+    const content = document.getElementById('collapsible-content');
+    if (content.style.maxHeight === '0px' || !content.style.maxHeight) {
+      content.style.maxHeight = content.scrollHeight + 'px'; // Expand content
+    } else {
+      content.style.maxHeight = '0px'; // Collapse content
+    }
+  }
+</script>
 
 <style>
   .hyperlink {
