@@ -411,6 +411,22 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
           },
         ],
       },
+      {
+        name: 'Martin Rogers',
+        job: 'Deputy Head of AI Lab/ML Research Scientist',
+        image: { src: images['/src/assets/images/team/martin-rogers.jpg'](), alt: 'Picture of Martin' },
+        description: 'British Antarctic Survey',
+        socials: [
+          {
+            icon: 'arcticons:linkedin',
+            href: 'https://uk.linkedin.com/in/martin-rogers-9a96831a6',
+          },
+          {
+            icon: 'arcticons:github',
+            href: 'https://github.com/MartinSJRogers',
+          },
+        ],
+      },
     ]}
   >
     <Fragment slot="bg">
