@@ -127,9 +127,9 @@ To add yourself to the website as a Contributor, please follow the normal GitHub
 
 - Create a fork of this repository.
 - Create a new branch and make the following changes:
-  - Add an profile photo to: `src/assets/images/team/` with the filename convention of <first-last.jpg> based on first and last names.
+  - Add an profile photo to: `src/assets/images/team/` with the filename convention of `first-last.jpg` based on first and last names.
   - Add your details to the Team Widget in: `src/pages/index.astro`. Search for any of the existing contributors within the file, and use it as a template to add your own.
-- Create a Pull Request and request a review from @bnubald, or the latest maintainer of the code.
+- Create a Pull Request and request a review from `@bnubald`, or the latest maintainer of the code.
 
 ## Acknowledgements
 
