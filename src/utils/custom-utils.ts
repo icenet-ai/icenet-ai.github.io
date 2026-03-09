@@ -105,13 +105,38 @@ export async function fetchGitHubStats(github_org: string, github_repo: string):
     }
 
     const github_api_url = `https://api.github.com/repos/${github_org}/${github_repo}`;
-    const github_api = await fetch(github_api_url);
-    const github_data = await github_api.json();
+    const MAX_RETRIES = 3;
+    const RETRY_DELAY_MS = 60_000; // 60 seconds
+
+    let github_data: any = null;
+
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        const response = await fetch(github_api_url);
+
+        if (!response.ok) {
+          throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+        }
+
+        github_data = await response.json();
+        break; // Success, exit the retry loop
+      } catch (err) {
+        console.error(`Attempt ${attempt} failed:`, err);
+
+        if (attempt < MAX_RETRIES) {
+          console.log(`Retrying in 60 seconds...`);
+          await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
+        } else {
+          console.warn(`All ${MAX_RETRIES} attempts failed. Using fallback '-' values.`);
+          github_data = {};
+        }
+      }
+    }
 
     const result: GitHubStats = {
-        n_stars: github_data.stargazers_count ?? '-',
-        n_forks: github_data.forks_count ?? '-',
-        n_watchers: github_data.subscribers_count ?? '-'
+      n_stars: github_data?.stargazers_count ?? '-',
+      n_forks: github_data?.forks_count ?? '-',
+      n_watchers: github_data?.subscribers_count ?? '-'
     };
 
     // Store the result in the cache with the current timestamp
