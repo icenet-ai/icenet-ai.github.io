@@ -36,18 +36,22 @@ jobs:
           post-cleanup: 'all'
       - name: Fetch icenet and install repository and dependencies for docs
         run: |
-          micromamba install -y -c conda-forge netcdf4=1.6.0
           eval "$(micromamba shell hook --shell bash)"
-          micromamba activate base
+          micromamba create -n docs-env python=3.11 netcdf4=1.6.0 -c conda-forge -y
+          micromamba activate docs-env
+
           git clone https://github.com/icenet-ai/icenet.git
           cd icenet
           git submodule set-url icenet-notebooks https://github.com/icenet-ai/icenet-notebooks.git
           git submodule update --init
+
+          pip install --upgrade pip
           pip install .
           cd docs
           pip install -r requirements.txt
           make html
           cd ../..
+        shell: bash
       - name: Copy Sphinx docs across
         run: |
           cp -r icenet/docs/_build/html/ public/docs/
