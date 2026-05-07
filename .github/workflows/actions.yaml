@@ -35,10 +35,11 @@ jobs:
             bash
           post-cleanup: 'all'
       - name: Fetch icenet and install repository and dependencies for docs
+        shell: bash -l {0}
         run: |
-          micromamba install -y -c conda-forge netcdf4=1.6.0
           eval "$(micromamba shell hook --shell bash)"
           micromamba activate base
+          micromamba install -y -c conda-forge netcdf4=1.6.0
           git clone https://github.com/icenet-ai/icenet.git
           cd icenet
           git submodule set-url icenet-notebooks https://github.com/icenet-ai/icenet-notebooks.git
