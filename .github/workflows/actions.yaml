@@ -8,8 +8,10 @@ on:
   # Using a different branch name? Replace `main` with your branch’s name
   push:
     branches: [ main ]
+
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+
   schedule:
     # Run at 00:00 UTC on the first day of every month
     # Updates pypi + GitHub stats
@@ -29,26 +31,37 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout this repository using git
         uses: actions/checkout@v6
+
       - uses: mamba-org/setup-micromamba@v2
         with:
           init-shell: >-
             bash
-          post-cleanup: 'all'
-      - name: Cache micromamba env
-        uses: actions/cache@v5
-        with:
-          path: ~/.micromamba/envs/docs-env
-          key: ${{ runner.os }}-docs-env-${{ hashFiles('icenet/docs/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-docs-env-
-      - name: Cache micromamba pkgs
-        uses: actions/cache@v5
-        with:
-          path: ~/.micromamba/pkgs
-          key: ${{ runner.os }}-micromamba-pkgs-${{ hashFiles('icenet/docs/requirements.txt') }}
+
+          environment-name: docs-env
+
+          create-args: >-
+            python=3.11
+            netcdf4=1.6.0
+
+          channels: conda-forge
+
+          # Let setup-micromamba manage caching directly
+          cache-environment: true
+          cache-downloads: true
+
+          cache-environment-key: >-
+            docs-env-${{ runner.os }}-${{ hashFiles('icenet/docs/requirements.txt') }}
+
+          cache-downloads-key: >-
+            micromamba-pkgs-${{ runner.os }}-${{ hashFiles('icenet/docs/requirements.txt') }}
+
+          # Keep cache directories after job cleanup
+          post-cleanup: 'shell-init'
+
       - name: Cache pip packages
         uses: actions/cache@v5
         with:
@@ -56,6 +69,7 @@ jobs:
           key: ${{ runner.os }}-pip-${{ hashFiles('icenet/docs/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
+
       - name: Clone icenet repo
         run: |
           if [ ! -d "icenet" ]; then
@@ -65,29 +79,25 @@ jobs:
           git submodule set-url icenet-notebooks https://github.com/icenet-ai/icenet-notebooks.git
           git submodule update --init --depth 1
           cd ..
+
       - name: Create/activate micromamba env and install dependencies
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          if ! micromamba env list | grep docs-env; then
-            micromamba create -n docs-env python=3.11 netcdf4=1.6.0 -c conda-forge -y
-          fi
-          micromamba activate docs-env
-
-          # Upgrade pip and install icenet + docs requirements
           pip install --upgrade pip
           pip install -e icenet
           pip install -r icenet/requirements_dev.txt
           pip install -r icenet/docs/requirements.txt
-        shell: bash
+        shell: bash -l {0}
+
       - name: Build Sphinx docs
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate docs-env
           make -C icenet/docs html -j $(nproc)
-        shell: bash
+        shell: bash -l {0}
+
       - name: Copy Sphinx docs across
         run: |
-          cp -r icenet/docs/_build/html/ public/docs/
+          mkdir -p public/docs
+          cp -r icenet/docs/_build/html/* public/docs/
+
       - name: Install, build, and upload your site
         if: env.LOCAL_TEST != 'true'
         uses: withastro/action@v6
@@ -98,10 +108,13 @@ jobs:
 
   deploy:
     needs: build
+
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
