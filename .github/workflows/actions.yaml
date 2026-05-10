@@ -2,6 +2,7 @@ name: Deploy to GitHub Pages
 
 env:
   LOCAL_TEST: false
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
 
 on:
   # Trigger the workflow every time you push to the `main` branch
@@ -54,10 +55,20 @@ jobs:
           cache-downloads: true
 
           cache-environment-key: >-
-            docs-env-${{ runner.os }}-${{ hashFiles('icenet/docs/requirements.txt') }}
+            docs-env-${{ runner.os }}-${{
+              hashFiles(
+                'icenet/docs/requirements.txt',
+                'icenet/requirements_dev.txt'
+              )
+            }}
 
           cache-downloads-key: >-
-            micromamba-pkgs-${{ runner.os }}-${{ hashFiles('icenet/docs/requirements.txt') }}
+            micromamba-pkgs-${{ runner.os }}-${{
+              hashFiles(
+                'icenet/docs/requirements.txt',
+                'icenet/requirements_dev.txt'
+              )
+            }}
 
           # Keep cache directories after job cleanup
           post-cleanup: 'shell-init'
@@ -66,7 +77,13 @@ jobs:
         uses: actions/cache@v5
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('icenet/docs/requirements.txt') }}
+          key: >-
+            ${{ runner.os }}-pip-${{
+              hashFiles(
+                'icenet/docs/requirements.txt',
+                'icenet/requirements_dev.txt'
+              )
+            }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
