@@ -1,12 +1,18 @@
 name: Deploy to GitHub Pages
 
+env:
+  LOCAL_TEST: false
+  PIP_DISABLE_PIP_VERSION_CHECK: 1
+
 on:
   # Trigger the workflow every time you push to the `main` branch
   # Using a different branch name? Replace `main` with your branch’s name
   push:
     branches: [ main ]
+
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
+
   schedule:
     # Run at 00:00 UTC on the first day of every month
     # Updates pypi + GitHub stats
@@ -25,45 +31,107 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+
     steps:
       - name: Checkout this repository using git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
       - uses: mamba-org/setup-micromamba@v2
         with:
           init-shell: >-
             bash
-          post-cleanup: 'all'
-      - name: Fetch icenet and install repository and dependencies for docs
+
+          environment-name: docs-env
+
+          create-args: >-
+            python=3.11
+            netcdf4=1.6.0
+
+          channels: conda-forge
+
+          # Let setup-micromamba manage caching directly
+          cache-environment: true
+          cache-downloads: true
+
+          cache-environment-key: >-
+            docs-env-${{ runner.os }}-${{
+              hashFiles(
+                'icenet/docs/requirements.txt',
+                'icenet/requirements_dev.txt'
+              )
+            }}
+
+          cache-downloads-key: >-
+            micromamba-pkgs-${{ runner.os }}-${{
+              hashFiles(
+                'icenet/docs/requirements.txt',
+                'icenet/requirements_dev.txt'
+              )
+            }}
+
+          # Keep cache directories after job cleanup
+          post-cleanup: 'shell-init'
+
+      - name: Cache pip packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: >-
+            ${{ runner.os }}-pip-${{
+              hashFiles(
+                'icenet/docs/requirements.txt',
+                'icenet/requirements_dev.txt'
+              )
+            }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Clone icenet repo
         run: |
-          micromamba install -y -c conda-forge netcdf4=1.6.0
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba activate base
-          git clone https://github.com/icenet-ai/icenet.git
+          if [ ! -d "icenet" ]; then
+            git clone --depth 1 https://github.com/icenet-ai/icenet.git
+          fi
           cd icenet
           git submodule set-url icenet-notebooks https://github.com/icenet-ai/icenet-notebooks.git
-          git submodule update --init
-          pip install .
-          cd docs
-          pip install -r requirements.txt
-          make html
-          cd ../..
+          git submodule update --init --depth 1
+          cd ..
+
+      - name: Create/activate micromamba env and install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -e icenet
+          pip install -r icenet/requirements_dev.txt
+          pip install -r icenet/docs/requirements.txt
+        shell: bash -l {0}
+
+      - name: Build Sphinx docs
+        run: |
+          make -C icenet/docs html -j $(nproc)
+        shell: bash -l {0}
+
       - name: Copy Sphinx docs across
         run: |
-          cp -r icenet/docs/_build/html/ public/docs/
+          mkdir -p public/docs
+          cp -r icenet/docs/_build/html/* public/docs/
+
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        # with:
-          # path: . # The root location of your Astro project inside the repository. (optional)
-          # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
+        if: env.LOCAL_TEST != 'true'
+        uses: withastro/action@v6
+        with:
+          path: . # The root location of your Astro project inside the repository. (optional)
+          node-version: 26 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
           # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
   deploy:
     needs: build
+
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

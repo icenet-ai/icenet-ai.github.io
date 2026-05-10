@@ -186,6 +186,9 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         link: 'https://github.com/icenet-ai/icenet-pipeline',
         icon: 'tabler:terminal-2',
       },
+      // Added a dummy so icenet-mp is centred
+      {
+      },
       {
         title: '(new) icenet-mp',
         description:
@@ -433,22 +436,6 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
         ],
       },
       {
-        name: 'Sophie Arana',
-        job: 'Research Lead for Sea Ice',
-        image: { src: images['/src/assets/images/team/sophie-arana.jpg'](), alt: 'Picture of Sophie' },
-        description: 'Alan Turing Institute',
-        socials: [
-          {
-            icon: 'arcticons:linkedin',
-            href: 'https://uk.linkedin.com/in/sophiearana',
-          },
-          {
-            icon: 'arcticons:earth',
-            href: 'https://www.turing.ac.uk/people/dr-sophie-arana',
-          },
-        ],
-      },
-      {
         name: 'Jonathan Smith',
         job: 'AI Team Lead',
         image: { src: images['/src/assets/images/team/jonathan-smith.jpg'](), alt: 'Picture of Jonathan' },
@@ -638,6 +625,22 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
             {
               icon: 'arcticons:github',
               href: 'https://www.github.com/aldenc/',
+            },
+          ],
+        },
+        {
+          name: 'Sophie Arana',
+          job: 'Research Lead for Sea Ice',
+          image: { src: images['/src/assets/images/team/sophie-arana.jpg'](), alt: 'Picture of Sophie' },
+          description: 'Alan Turing Institute',
+          socials: [
+            {
+              icon: 'arcticons:linkedin',
+              href: 'https://uk.linkedin.com/in/sophiearana',
+            },
+            {
+              icon: 'arcticons:earth',
+              href: 'https://www.turing.ac.uk/people/dr-sophie-arana',
             },
           ],
         },
