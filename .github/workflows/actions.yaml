@@ -1,5 +1,8 @@
 name: Deploy to GitHub Pages
 
+env:
+  LOCAL_TEST: false
+
 on:
   # Trigger the workflow every time you push to the `main` branch
   # Using a different branch name? Replace `main` with your branch’s name
@@ -28,35 +31,66 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout this repository using git
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - uses: mamba-org/setup-micromamba@v2
         with:
           init-shell: >-
             bash
           post-cleanup: 'all'
-      - name: Fetch icenet and install repository and dependencies for docs
+      - name: Cache micromamba env
+        uses: actions/cache@v5
+        with:
+          path: ~/.micromamba/envs/docs-env
+          key: ${{ runner.os }}-docs-env-${{ hashFiles('icenet/docs/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-docs-env-
+      - name: Cache micromamba pkgs
+        uses: actions/cache@v5
+        with:
+          path: ~/.micromamba/pkgs
+          key: ${{ runner.os }}-micromamba-pkgs-${{ hashFiles('icenet/docs/requirements.txt') }}
+      - name: Cache pip packages
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('icenet/docs/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      - name: Clone icenet repo
         run: |
-          eval "$(micromamba shell hook --shell bash)"
-          micromamba create -n docs-env python=3.11 netcdf4=1.6.0 -c conda-forge -y
-          micromamba activate docs-env
-
-          git clone https://github.com/icenet-ai/icenet.git
+          if [ ! -d "icenet" ]; then
+            git clone --depth 1 https://github.com/icenet-ai/icenet.git
+          fi
           cd icenet
           git submodule set-url icenet-notebooks https://github.com/icenet-ai/icenet-notebooks.git
-          git submodule update --init
+          git submodule update --init --depth 1
+          cd ..
+      - name: Create/activate micromamba env and install dependencies
+        run: |
+          eval "$(micromamba shell hook --shell bash)"
+          if ! micromamba env list | grep docs-env; then
+            micromamba create -n docs-env python=3.11 netcdf4=1.6.0 -c conda-forge -y
+          fi
+          micromamba activate docs-env
 
+          # Upgrade pip and install icenet + docs requirements
           pip install --upgrade pip
-          pip install .
-          cd docs
-          pip install -r requirements.txt
-          make html
-          cd ../..
+          pip install -e icenet
+          pip install -r icenet/requirements_dev.txt
+          pip install -r icenet/docs/requirements.txt
+        shell: bash
+      - name: Build Sphinx docs
+        run: |
+          eval "$(micromamba shell hook --shell bash)"
+          micromamba activate docs-env
+          make -C icenet/docs html -j $(nproc)
         shell: bash
       - name: Copy Sphinx docs across
         run: |
           cp -r icenet/docs/_build/html/ public/docs/
       - name: Install, build, and upload your site
-        uses: withastro/action@v3
+        if: env.LOCAL_TEST != 'true'
+        uses: withastro/action@v6
         # with:
           # path: . # The root location of your Astro project inside the repository. (optional)
           # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
