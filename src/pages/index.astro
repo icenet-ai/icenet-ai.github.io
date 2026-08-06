@@ -495,6 +495,22 @@ const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/
           },
         ],
       },
+      {
+        name: 'Sophie Grunau',
+        job: 'Research Software Engineer',
+        image: { src: images['/src/assets/images/team/sophie-grunau.jpg'](), alt: 'Picture of Sophie' },
+        description: 'British Antarctic Survey',
+        socials: [
+          {
+            icon: 'arcticons:linkedin',
+            href: 'https://au.linkedin.com/in/sophie-grunau-b31057177',
+          },
+          {
+            icon: 'arcticons:github',
+            href: 'https://github.com/SophieGrunau',
+          },
+        ],
+      },
     ]}
   >
     <Fragment slot="bg">
