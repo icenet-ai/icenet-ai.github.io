@@ -25,10 +25,6 @@ export const headerData = {
           text: 'Outputs',
           href: getPermalink('/#output-timeline'),
         },
-        {
-          text: 'Contact',
-          href: getPermalink('/#contact-us'),
-        },
       ],
     },
     {
